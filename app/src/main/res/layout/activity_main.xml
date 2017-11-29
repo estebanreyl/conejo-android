@@ -6,17 +6,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="conejo.stanford.conejo.MainActivity">
-    
+
 
     <me.crosswall.lib.coverflow.core.PagerContainer
-        android:id="@+id/pager_container"
+        android:id="@+id/pants_container"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="?attr/colorPrimary">
+        android:layout_height="180dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/shoes_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <android.support.v4.view.ViewPager
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center" />
 
     </me.crosswall.lib.coverflow.core.PagerContainer>
 
+    <me.crosswall.lib.coverflow.core.PagerContainer
+        android:id="@+id/shoes_container"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/other_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center" />
+
+    </me.crosswall.lib.coverflow.core.PagerContainer>
+
+    <me.crosswall.lib.coverflow.core.PagerContainer
+        android:id="@+id/other_container"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center" />
+
+    </me.crosswall.lib.coverflow.core.PagerContainer>
+
+    <me.crosswall.lib.coverflow.core.PagerContainer
+        android:id="@+id/shirt_container"
+        android:layout_width="585dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/pants_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center" />
+
+    </me.crosswall.lib.coverflow.core.PagerContainer>
+    <!--
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
@@ -28,31 +90,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navigation" />
+-->
 
-    <HorizontalScrollView
-        android:layout_width="299dp"
-        android:layout_height="83dp"
-        android:layout_marginBottom="320dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        tools:layout_editor_absoluteX="44dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="5dp"
-        android:layout_height="10dp"
-        tools:layout_editor_absoluteX="189dp"
-        tools:layout_editor_absoluteY="441dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
-    </HorizontalScrollView>
 
 </android.support.constraint.ConstraintLayout>
