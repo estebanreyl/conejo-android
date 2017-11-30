@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E5E8E8"
     tools:context="conejo.stanford.conejo.MainActivity">
 
+    <LinearLayout
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:background="@color/cardview_dark_background">
+
+
+    </LinearLayout>
+    <me.crosswall.lib.coverflow.core.PagerContainer
+        android:id="@+id/shirt_container"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="3"
+        android:layout_marginTop="12dp"
+        android:padding="0px">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+    </me.crosswall.lib.coverflow.core.PagerContainer>
 
     <me.crosswall.lib.coverflow.core.PagerContainer
         android:id="@+id/pants_container"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/shoes_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="0px"
+        android:layout_weight="4"
+        android:padding="0px"
+        android:layout_marginTop="12dp">
 
         <android.support.v4.view.ViewPager
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center" />
 
     </me.crosswall.lib.coverflow.core.PagerContainer>
@@ -28,17 +50,14 @@
     <me.crosswall.lib.coverflow.core.PagerContainer
         android:id="@+id/shoes_container"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/other_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:padding="0px"
+        android:layout_marginTop="12dp">
 
         <android.support.v4.view.ViewPager
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center" />
 
     </me.crosswall.lib.coverflow.core.PagerContainer>
@@ -46,38 +65,19 @@
     <me.crosswall.lib.coverflow.core.PagerContainer
         android:id="@+id/other_container"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:padding="0px">
 
         <android.support.v4.view.ViewPager
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center" />
 
     </me.crosswall.lib.coverflow.core.PagerContainer>
 
-    <me.crosswall.lib.coverflow.core.PagerContainer
-        android:id="@+id/shirt_container"
-        android:layout_width="585dp"
-        android:layout_height="180dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/pants_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <android.support.v4.view.ViewPager
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center" />
-
-    </me.crosswall.lib.coverflow.core.PagerContainer>
     <!--
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -93,4 +93,4 @@
 -->
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

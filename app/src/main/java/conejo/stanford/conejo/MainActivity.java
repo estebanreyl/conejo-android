@@ -17,53 +17,39 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.LinkageCoverTransformer;
 import me.crosswall.lib.coverflow.core.LinkagePagerContainer;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
+
 public class MainActivity extends AppCompatActivity {
-
     private TextView mTextMessage;
-    /*
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_wardrobe);
-                    return true;
-            }
-            return false;
-        }
-    };*/
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }*/
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PagerContainer container = (PagerContainer) findViewById(R.id.pager_container);
+
+
+        PagerContainer containerShirts = (PagerContainer) findViewById(R.id.shirt_container);
+        PagerContainer containerPants = (PagerContainer) findViewById(R.id.pants_container);
+        PagerContainer containerShoes = (PagerContainer) findViewById(R.id.shoes_container);
+        PagerContainer containerAccesories = (PagerContainer) findViewById(R.id.other_container);
+        initCarousels(containerShirts,DemoData.shirts);
+        initCarousels(containerPants,DemoData.pants);
+        initCarousels(containerShoes,DemoData.shoes);
+        initCarousels(containerAccesories,DemoData.accessories);
+
+    }
+
+    private void initCarousels(PagerContainer container, int[] list){
+        //-----Shirt-----
+        //PagerContainer containerShirts = (PagerContainer) findViewById(R.id.shirt_container);
         ViewPager pager = container.getViewPager();
-        pager.setAdapter(new MyPagerAdapter());
+        pager.setAdapter(new MyPagerAdapter(list));
         pager.setClipChildren(false);
-        //
         pager.setOffscreenPageLimit(15);
 
         container.setPageItemClickListener(new PageItemClickListener() {
@@ -74,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         boolean showTransformer = getIntent().getBooleanExtra("showTransformer",false);
-
-
         if(showTransformer){
 
             new CoverFlow.Builder()
@@ -88,18 +72,25 @@ public class MainActivity extends AppCompatActivity {
         }else{
             pager.setPageMargin(30);
         }
+
     }
 
 
     private class MyPagerAdapter extends PagerAdapter {
+
+        public int[] list;
+
+        public MyPagerAdapter(int[] passed){
+            list = passed;
+        }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
 
             View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_cover,null);
             ImageView imageView = (ImageView) view.findViewById(R.id.image_cover);
-            imageView.setImageDrawable(getResources().getDrawable(DemoData.covers[position]));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setImageDrawable(getResources().getDrawable(list[position]));
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             container.addView(view);
             return view;
         }
@@ -111,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return DemoData.covers.length;
+            return list.length;
         }
 
         @Override
