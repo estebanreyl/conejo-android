@@ -1,33 +1,17 @@
 package conejo.stanford.conejo;
-
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Debug;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.LinkagePager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
-
 import me.crosswall.lib.coverflow.CoverFlow;
-import me.crosswall.lib.coverflow.core.LinkageCoverTransformer;
-import me.crosswall.lib.coverflow.core.LinkagePagerContainer;
-import me.crosswall.lib.coverflow.core.PageItemClickListener;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
 import static android.support.v4.view.PagerAdapter.POSITION_NONE;
@@ -49,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         PagerContainer containerPants = (PagerContainer) findViewById(R.id.pants_container);
         PagerContainer containerShoes = (PagerContainer) findViewById(R.id.shoes_container);
         PagerContainer containerAccesories = (PagerContainer) findViewById(R.id.other_container);
-
         initCarousels(containerShirts,DemoData.shirts,0);
         initCarousels(containerPants,DemoData.pants,1);
         initCarousels(containerShoes,DemoData.shoes,2);
@@ -120,7 +103,10 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageDrawable(getResources().getDrawable(list[position]));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             view.setTag(position);
-
+            if(highlighted[arrayNum]){
+                ImageView lock = (ImageView) view.findViewById(R.id.lock);
+                lock.setVisibility(View.VISIBLE);
+            }
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

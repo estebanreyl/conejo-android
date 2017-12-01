@@ -15,8 +15,7 @@
         app:cardUseCompatPadding="false"
         app:cardPreventCornerOverlap="false"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        >
+        android:layout_marginRight="20dp">
 
         <ImageView
             android:id="@+id/image_cover"
@@ -27,4 +26,15 @@
             android:visibility="visible"/>
 
     </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/lock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/cardview"
+        android:layout_alignParentTop="true"
+        android:elevation="3dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lock"
+        android:visibility="invisible"/>
 </RelativeLayout>
