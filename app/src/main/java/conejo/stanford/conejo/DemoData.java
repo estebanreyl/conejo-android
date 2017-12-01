@@ -14,6 +14,6 @@ public class DemoData {
     public static int[] shoes = {R.mipmap.shoe_1,R.mipmap.shoe_2,R.mipmap.shoe_3, R.mipmap.shoe_4,
     R.mipmap.shoe_5,R.mipmap.shoe_6};
 
-    public static int[] accessories = {R.mipmap.accesory_1,R.mipmap.accesory_2,R.mipmap.accesory_3};
+    public static int[] accesories = {R.mipmap.accesory_1,R.mipmap.accesory_2,R.mipmap.accesory_3};
 
 }

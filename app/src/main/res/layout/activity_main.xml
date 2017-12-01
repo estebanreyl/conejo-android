@@ -15,39 +15,51 @@
     >
     <LinearLayout
         android:layout_height="0px"
-        android:layout_weight="1"
+        android:layout_weight="1.1"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:background="@color/cardview_dark_background">
+        android:background="#FFFFFF">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_width="0dp"
+        <LinearLayout
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:scaleType="fitCenter"
-            android:visibility="visible"
-            android:padding="2dp"
-            android:src="@drawable/logo"
-            />
+            android:layout_width="0px"
+            android:gravity="start">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:visibility="visible"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:src="@drawable/logo_black"
+                />
+
+        </LinearLayout>
+
+
         <ImageButton
-            android:background="null"
-            android:src="@drawable/wardrobe"
+            android:contentDescription="add"
+            android:background="@android:color/transparent"
+            android:src="@drawable/add"
             android:layout_gravity="center"
             android:layout_width="0dp"
-            android:padding="10dp"
+            android:padding="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:visibility="visible"/>
 
         <ImageButton
-            android:background="null"
-            android:src="@drawable/store"
+            android:contentDescription="store"
+            android:background="@android:color/transparent"
+            android:src="@drawable/store_green"
             android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:padding="10dp"
             android:scaleType="fitCenter"
             android:visibility="visible"/>
 
@@ -97,12 +109,18 @@
 
     </me.crosswall.lib.coverflow.core.PagerContainer>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="6dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
     <me.crosswall.lib.coverflow.core.PagerContainer
         android:id="@+id/other_container"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1"
-        android:layout_marginTop="12dp"
+        android:layout_weight="1.4"
+        android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
         android:padding="0px">
 
@@ -114,23 +132,8 @@
     </me.crosswall.lib.coverflow.core.PagerContainer>
 
 
-    <!--
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
--->
-
-
     </LinearLayout>
-
+<!--
     <ImageButton
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -139,6 +142,6 @@
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:src="@drawable/save"
-        android:visibility="visible" />
+        android:visibility="visible" /> -->
 
 </RelativeLayout>
