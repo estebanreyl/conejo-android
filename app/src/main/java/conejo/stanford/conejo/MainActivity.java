@@ -2,6 +2,7 @@ package conejo.stanford.conejo;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -17,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.Console;
+
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.LinkageCoverTransformer;
 import me.crosswall.lib.coverflow.core.LinkagePagerContainer;
@@ -51,20 +55,20 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(new MyPagerAdapter(list));
         pager.setClipChildren(false);
         pager.setOffscreenPageLimit(15);
-
-        container.setPageItemClickListener(new PageItemClickListener() {
+        container.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this,"position:" + position,Toast.LENGTH_SHORT).show();
+            public boolean onLongClick(View view) {
+                System.out.println("printed thingy:" + view.getId());
+                return false;
             }
         });
 
-        boolean showTransformer = getIntent().getBooleanExtra("showTransformer",false);
+        boolean showTransformer = getIntent().getBooleanExtra("showTransformer",true);
         if(showTransformer){
 
             new CoverFlow.Builder()
                     .with(pager)
-                    .scale(0.3f)
+                    .scale(0.15f)
                     .pagerMargin(getResources().getDimensionPixelSize(R.dimen.pager_margin))
                     .spaceSize(0f)
                     .build();
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             pager.setPageMargin(30);
         }
+
 
     }
 
