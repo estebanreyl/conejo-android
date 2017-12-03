@@ -31,7 +31,9 @@
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
