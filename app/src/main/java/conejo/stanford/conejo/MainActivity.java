@@ -19,11 +19,11 @@ import static android.support.v4.view.PagerAdapter.POSITION_NONE;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
-    private boolean[] highlighted = new boolean[]{false,false,false,false};
+    private boolean[] highlighted = new boolean[]{false,false,false};
     private MyPagerAdapter shirts;
     private MyPagerAdapter pants;
     private MyPagerAdapter shoes;
-    private MyPagerAdapter accesories;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,30 +32,24 @@ public class MainActivity extends AppCompatActivity {
         PagerContainer containerShirts = (PagerContainer) findViewById(R.id.shirt_container);
         PagerContainer containerPants = (PagerContainer) findViewById(R.id.pants_container);
         PagerContainer containerShoes = (PagerContainer) findViewById(R.id.shoes_container);
-        PagerContainer containerAccesories = (PagerContainer) findViewById(R.id.other_container);
         initCarousels(containerShirts,DemoData.shirts,0);
         initCarousels(containerPants,DemoData.pants,1);
         initCarousels(containerShoes,DemoData.shoes,2);
-        initCarousels(containerAccesories,DemoData.accesories,3);
-
     }
 
     //Carousel init
     private void initCarousels(PagerContainer container, int[] list, int num){
         ViewPager pager = container.getViewPager();
-        //Currently used as the method to get the adapter returns a bizzarre adapter
+        //Currently used as the method to get the adapters returns a bizzarre incomplete adapter
         if(num == 0){
             shirts = new MyPagerAdapter(list, num);
             pager.setAdapter(shirts);
         }else if(num == 1){
             pants = new MyPagerAdapter(list, num);
             pager.setAdapter(pants);
-        }else if(num == 2){
+        }else{
             shoes = new MyPagerAdapter(list, num);
             pager.setAdapter(shoes);
-        }else if(num == 3){
-            accesories = new MyPagerAdapter(list, num);
-            pager.setAdapter(accesories);
         }
 
         pager.setClipChildren(false);
@@ -79,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         shirts.randomSelect();
         pants.randomSelect();
         shoes.randomSelect();
-        accesories.randomSelect();
     }
 
     //Carousel Adapter
@@ -152,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             highlighted[arrayNum] = false;
             this.notifyDataSetChanged();
         }
-        //This has a suuuuuuuper small failure rate, must update rand function
+
         public void randomSelect(){
             if(highlighted[arrayNum])return;
             list = new int[(int)(Math.random()*listBackup.length + 1)];
