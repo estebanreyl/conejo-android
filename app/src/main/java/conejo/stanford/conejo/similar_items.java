@@ -106,6 +106,10 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
              }
      }
 
+     public void back(View view) {
+        finish();
+     }
+
      //Carousel Adapter
      //Should reimplement using arrayAdapter to improve speed
      class MyPagerAdapter extends PagerAdapter {

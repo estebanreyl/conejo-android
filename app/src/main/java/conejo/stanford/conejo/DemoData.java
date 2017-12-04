@@ -33,7 +33,7 @@ public class DemoData {
     }
 
     public static String randItem(String items[]){
-        return items[(int)(Math.random() *items.length + 1)];
+        return items[(int)(Math.random() *items.length)];
     }
 
     //Recommended items:

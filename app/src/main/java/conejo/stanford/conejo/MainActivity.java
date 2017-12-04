@@ -18,7 +18,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
 import static android.support.v4.view.PagerAdapter.POSITION_NONE;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity   {
     private TextView mTextMessage;
     private boolean[] highlighted = new boolean[]{false,false,false};
     private MyPagerAdapter shirts;
