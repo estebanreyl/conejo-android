@@ -1,4 +1,5 @@
 package conejo.stanford.conejo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -110,6 +111,22 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         fixElem(position);
                     }
+                }
+            });
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = (Integer) v.getTag();
+                    Intent intent = new Intent(getBaseContext(), similar_items.class);
+                    String type = "";
+                    if(arrayNum == 0) type = "Shirts";
+                    else if(arrayNum==1) type = "Pants";
+                    else type ="Shoes";
+                    intent.putExtra("type",type);
+                    intent.putExtra("id",listBackup[position]);
+                    startActivity(intent);
+                    return false;
                 }
             });
 

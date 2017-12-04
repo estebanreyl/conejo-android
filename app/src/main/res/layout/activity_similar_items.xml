@@ -4,15 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="conejo.stanford.conejo.similar_items">
+    android:orientation="vertical"
+    tools:context="conejo.stanford.conejo.similar_items"
+    android:background="#E5E8E8"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="0.8"
+        android:orientation="horizontal"
+        android:layout_height="1px"
+        android:background="#FFFFFF">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/left_arrow"
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="ItemName"
+            android:gravity="center|start"
+            android:paddingLeft="10dp"
+            android:textSize="30sp"
+            android:textColor="#000000"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="1dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="6"
+        android:orientation="horizontal"
+        android:layout_height="1px"
+        android:background="#FFFFFF">
+        <ImageView
+            android:layout_width="0dp"
+            android:id="@+id/main_display"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:src = "@mipmap/shirt_1"
+            android:scaleType="fitCenter"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:text="Shirt from Gap's Summer 2008 collection \n\nYour size: M \nPrice: $41.99"
+                android:gravity="center"
+                android:textSize="20sp"/>
+            <Button
+                android:gravity="center|end"
+                android:paddingEnd="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:textColor="#1dae2e"
+                android:background="@android:color/transparent"
+                android:text="Buy Again"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center|left"
+        android:text="Similar Items:"
+        android:textSize="25sp"
+        android:paddingStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="#000000"/>
 
     <me.crosswall.lib.coverflow.core.PagerContainer
-        android:id="@+id/shirt_container"
+        android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="2"
-        android:layout_marginTop="6dp"
-        android:padding="0px">
+        android:layout_weight="5"
+        android:padding="0px"
+        android:layout_marginBottom="5dp">
 
         <android.support.v4.view.ViewPager
             android:layout_width="200dp"
