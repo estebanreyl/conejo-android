@@ -16,15 +16,11 @@
         android:orientation="horizontal"
         android:background="#FFFFFF">
 
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:layout_width="0px"
-            android:gravity="center|start">
 
             <ImageView
-                android:layout_width="45dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:scaleType="fitCenter"
@@ -32,15 +28,29 @@
                 android:visibility="visible" />
             <TextView
                 android:id="@+id/item_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
                 android:text="Find More"
                 android:textSize="30dp"
                 android:textColor="#000000"
-                android:paddingLeft="7dp"/>
+                android:paddingLeft="7dp"
+                android:gravity="center|start"/>
 
-        </LinearLayout>
-    </LinearLayout>>
+            <ImageButton
+                android:gravity="center|start"
+                android:contentDescription="profile"
+                android:background="@android:color/transparent"
+                android:src="@drawable/profile"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:padding="16dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:visibility="visible"/>
+
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_marginTop="1dp"
