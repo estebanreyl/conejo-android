@@ -11,11 +11,11 @@ import java.io.IOException;
  * Created by Esteb on 12/4/2017.
  */
 
-public class camera_preview extends SurfaceView implements SurfaceHolder.Callback {
+public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         private SurfaceHolder mHolder;
         private Camera mCamera;
 
-        public camera_preview(Context context, Camera camera) {
+        public CameraPreview(Context context, Camera camera) {
             super(context);
             mCamera = camera;
 

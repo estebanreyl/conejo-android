@@ -1,7 +1,6 @@
  package conejo.stanford.conejo;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import java.util.Collections;
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
- public class similar_items extends AppCompatActivity {
+ public class SimilarItems extends AppCompatActivity {
     private MyPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
          @Override
          public Object instantiateItem(ViewGroup container, int position) {
 
-             View view = LayoutInflater.from(similar_items.this).inflate(R.layout.item_cover_buy,null);
+             View view = LayoutInflater.from(SimilarItems.this).inflate(R.layout.item_cover_buy,null);
              ImageView imageView = (ImageView) view.findViewById(R.id.image_cover);
              imageView.setImageDrawable(getResources().getDrawable(list[position]));
              imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
