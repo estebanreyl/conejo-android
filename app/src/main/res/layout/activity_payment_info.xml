@@ -7,6 +7,7 @@
     tools:context="conejo.stanford.conejo.profileActivity"
     android:orientation="vertical"
     android:background="#E5E8E8">
+    <!--Top Bar-->
     <LinearLayout
         android:layout_height="0px"
         android:layout_weight="0.8"
@@ -34,7 +35,6 @@
             android:textColor="#000000"
             android:paddingLeft="7dp"
             android:gravity="center|start"/>
-
         <ImageButton
             android:gravity="center|start"
             android:contentDescription="home"
@@ -49,13 +49,12 @@
             android:visibility="visible"/>
 
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_marginTop="1dp"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
-
+    <!--Payments-->
     <LinearLayout
         android:layout_weight="9"
         android:layout_width="match_parent"
@@ -64,60 +63,123 @@
         android:gravity="top"
         >
 
+        <!--Payment Button-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:layout_marginBottom="1dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_paddingStart="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/mastercard" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#1dae2e"
+                    android:text="8456"
+                    android:paddingStart="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MasterCard"
+                    android:paddingStart="20dp"/>
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:background="@android:color/white"
+                android:textAllCaps="false"
+                android:textColor="#1dae2e"
+                android:text="Edit"/>
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:background="@android:color/white"
+                android:textAllCaps="false"
+                android:checked="true"
+                android:backgroundTint="#1dae2e"/>
+
+        </LinearLayout>
 
         <!--Payment Button-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="@android:color/white"
             android:layout_marginBottom="1dp">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-            <TextView
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_paddingStart="20dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/visa" />
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:/>
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:gravity="center">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:background="@android:color/white"
-            android:textAllCaps="false"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#1dae2e"
+                    android:text="4216"
+                    android:paddingStart="20dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Visa"
+                    android:paddingStart="20dp"/>
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
+                android:background="@android:color/white"
+                android:textAllCaps="false"
+                android:textColor="#1dae2e"
+                android:text="Edit"/>
+
+            <ToggleButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:background="@android:color/white"
+                android:textAllCaps="false"
+                android:checked="false"
+                android:backgroundTint="@android:color/darker_gray"/>
 
         </LinearLayout>
-
-        <!--Shipping Button-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Shipping Info"
-            android:layout_marginBottom="1dp"
-            android:background="@android:color/white"
-            android:textAllCaps="false"/>
-
-        <!--Password Button-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reset Password"
-            android:layout_marginBottom="1dp"
-            android:background="@android:color/white"
-            android:textAllCaps="false"/>
-
-
-        <!--Logout Button-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textColor="#ff0000"
-            android:background="@android:color/white"
-            android:textAllCaps="false"/>
 
         <View
             android:layout_width="match_parent"
@@ -125,6 +187,16 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:padding="90dp"
+            android:scaleType="fitCenter"
+            android:tint="@android:color/darker_gray"
+            android:src="@drawable/big_plus"/>
+
 
     </LinearLayout>
+
 </LinearLayout>
