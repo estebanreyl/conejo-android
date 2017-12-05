@@ -30,7 +30,8 @@
         <activity android:name=".SimilarItems" />
         <activity android:name=".AddItem" />
         <activity android:name=".profileActivity" />
-        <activity android:name=".PaymentInfo"></activity>
+        <activity android:name=".PaymentInfo" />
+        <activity android:name=".BuyScreen"></activity>
     </application>
 
 </manifest>
