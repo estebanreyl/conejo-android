@@ -5,11 +5,13 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
@@ -25,25 +27,31 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_similar_items);
 
-        //Get data from previous activity to lad
+        //Get data from previous activity to load
         Intent intent = getIntent();
         String type = intent.getStringExtra("type");
         int id = intent.getIntExtra("id",R.mipmap.pants_1);
         loadUI(type, id);
 
         if(type.equals("Shoes")){
-            initCarousels((PagerContainer) findViewById(R.id.item_container), DemoData.shoes);
+            initCarousels((PagerContainer) findViewById(R.id.item_container), DemoData.shoes, type);
         }else if(type.equals("Shirts")){
-            initCarousels((PagerContainer) findViewById(R.id.item_container), DemoData.shirts);
+            initCarousels((PagerContainer) findViewById(R.id.item_container), DemoData.shirts, type);
         }else{
-            initCarousels((PagerContainer) findViewById(R.id.item_container), DemoData.pants);
+            initCarousels((PagerContainer) findViewById(R.id.item_container), DemoData.pants, type);
         }
+    }
+
+     @Override
+    protected void onResume(){
+        super.onResume();
+        LinearLayout rl = (LinearLayout)findViewById(R.id.main_container);
+        rl.setAlpha(1);
     }
 
     private void loadUI(String type, int id){
         TextView description =  (TextView) findViewById(R.id.description);
         ImageView mainImg = (ImageView) findViewById(R.id.main_display);
-        TextView title = (TextView) findViewById(R.id.item_name);
         description.setText(generateDescription(type));
         mainImg.setImageResource(id);
     }
@@ -56,36 +64,36 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
     * Price: $[random Val]
     */
 
-    private String generateDescription(String type){
-        String description = type;
-        if(type.equals("Shoes")){
-            description += " from " +
-                    DemoData.randItem(DemoData.shoeBrands) + "'s " +
-                    DemoData.randItem(DemoData.holidaySeason) + " " +
-                    DemoData.randYear() + " collection"+
-                    "\n\n"+
-                    "Your Size: " + DemoData.randItem(DemoData.shoeSizes)+
-                    "\n"+
-                    "Price: $" + DemoData.randPrice();
-        }else{
-            description += " from " +
-                    DemoData.randItem(DemoData.shirtPantBrands) + "'s " +
-                    DemoData.randItem(DemoData.holidaySeason) + " " +
-                    DemoData.randYear() + " collection"+
-                    "\n\n"+
-                    "Your Size: " + DemoData.randItem(DemoData.shirtPantSizes)+
-                    "\n"+
-                    "Price: $" + DemoData.randPrice();
-        }
+     private String generateDescription(String type){
+         String description = type;
+         if(type.equals("Shoes")){
+             description += " from " +
+                     DemoData.randItem(DemoData.shoeBrands) + "'s " +
+                     DemoData.randItem(DemoData.holidaySeason) + " " +
+                     DemoData.randYear() + " collection"+
+                     "\n\n"+
+                     "Your Size: " + DemoData.randItem(DemoData.shoeSizes)+
+                     "\n"+
+                     "Price: $" + DemoData.randPrice();
+         }else{
+             description += " from " +
+                     DemoData.randItem(DemoData.shirtPantBrands) + "'s " +
+                     DemoData.randItem(DemoData.holidaySeason) + " " +
+                     DemoData.randYear() + " collection"+
+                     "\n\n"+
+                     "Your Size: " + DemoData.randItem(DemoData.shirtPantSizes)+
+                     "\n"+
+                     "Price: $" + DemoData.randPrice();
+         }
 
-        return description;
-    }
+         return description;
+     }
 
-     private void initCarousels(PagerContainer container, int[] list) {
+     private void initCarousels(PagerContainer container, int[] list, String type) {
          ViewPager pager = container.getViewPager();
          //Currently used as the method to get the adapters returns a bizzarre incomplete adapter
 
-             adapter = new MyPagerAdapter(list);
+             adapter = new MyPagerAdapter(list,type);
              pager.setAdapter(adapter);
 
              pager.setClipChildren(false);
@@ -108,12 +116,12 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
      //Carousel Adapter
      //Should reimplement using arrayAdapter to improve speed
      class MyPagerAdapter extends PagerAdapter {
-         private int[] listBackup;
          private int[] list;
+         String type;
 
-         MyPagerAdapter(int[] passed){
+         MyPagerAdapter(int[] passed, String type){
              list = passed;
-             listBackup = passed.clone();
+             this.type = type;
          }
 
          @Override
@@ -126,11 +134,12 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
              Button buyBtn = (Button) view.findViewById(R.id.buyBtn);
              buyBtn.setText("Buy $"+DemoData.randPrice());
              view.setTag(position);
+
              view.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
-                     int position=(Integer)v.getTag();
-
+                    int position=(Integer)v.getTag();
+                     (SimilarItems.this).startBuyCard(list[position], v, type );
                  }
              });
 
@@ -153,23 +162,21 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
              return (view == object);
          }
 
-         public void randomSelect(){
-             list = new int[(int)(Math.random()*listBackup.length + 1)];
-             int[] temp = listBackup.clone();
-             Collections.shuffle(Arrays.asList(temp));
-
-             for(int i = 0; i < list.length; i++){
-                 list[i] = temp[i];
-             }
-
-             this.notifyDataSetChanged();
-         }
-
          //Not the most desirable fix, essentially reloads the carousel, inneficient for large ones
          @Override
          public int getItemPosition(Object object){
              return POSITION_NONE;
          }
+     }
+
+     public void startBuyCard(int id, View v, String type){
+         LinearLayout rl = (LinearLayout)findViewById(R.id.main_container);
+         rl.setAlpha(0.3F);
+         Intent intent = new Intent(getBaseContext(), BuyScreen.class);
+         intent.putExtra("id", id);
+         intent.putExtra("price", ((Button)v.findViewById(R.id.buyBtn)).getText().toString().substring(4));
+         intent.putExtra("type", type);
+         startActivity(intent);
      }
 
 }
