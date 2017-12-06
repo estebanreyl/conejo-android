@@ -90,9 +90,12 @@ public class MainActivity extends AppCompatActivity   {
         startActivity(intent);
     }
 
-    //Carousel Adapter
-    //Should reimplement using arrayAdapter to improve speed
+    public void openProfile(View view) {
+        Intent intent = new Intent(this, profileActivity.class);
+        startActivity(intent);
+    }
 
+    //----------------------------------------CAMERA PERMS REQS-------------------------------------
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
@@ -114,7 +117,6 @@ public class MainActivity extends AppCompatActivity   {
         }
         // END_INCLUDE(onRequestPermissionsResult)
     }
-
     private void showCameraPreview() {
         // Check if the Camera permission has been granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -164,6 +166,8 @@ public class MainActivity extends AppCompatActivity   {
     }
 
     //-------------------------------------------ADAPTER CLASS--------------------------------------
+    //Carousel Adapter
+    //Should reimplement using arrayAdapter to improve speed
     public class MyPagerAdapter extends PagerAdapter {
         private int[] listBackup;
         private int[] list;

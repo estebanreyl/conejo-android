@@ -47,7 +47,7 @@
             android:src="@drawable/add"
             android:layout_gravity="center"
             android:layout_width="0dp"
-            android:padding="20dp"
+            android:padding="17dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
@@ -59,11 +59,12 @@
             android:src="@drawable/profile"
             android:layout_gravity="center"
             android:layout_width="0dp"
-            android:padding="16dp"
+            android:padding="12dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:onClick="openProfile"/>
 
     </LinearLayout>
     <me.crosswall.lib.coverflow.core.PagerContainer

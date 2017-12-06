@@ -38,7 +38,7 @@
                 android:layout_weight="2"
                 android:textColor="#1dae2e"
                 android:background="@android:color/transparent"
-                android:text="Buy $40.99" />
+                android:text="$40.99" />
 
         </LinearLayout>
 

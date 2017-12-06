@@ -1,7 +1,9 @@
 package conejo.stanford.conejo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class PaymentInfo extends AppCompatActivity {
 
@@ -9,5 +11,10 @@ public class PaymentInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_info);
+    }
+
+    public void openHome(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

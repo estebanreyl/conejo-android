@@ -5,7 +5,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
@@ -132,7 +127,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
              imageView.setImageDrawable(getResources().getDrawable(list[position]));
              imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
              Button buyBtn = (Button) view.findViewById(R.id.buyBtn);
-             buyBtn.setText("Buy $"+DemoData.randPrice());
+             buyBtn.setText("$"+DemoData.randPrice());
              view.setTag(position);
 
              view.setOnClickListener(new View.OnClickListener() {
@@ -172,10 +167,16 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
      public void startBuyCard(int id, View v, String type){
          LinearLayout rl = (LinearLayout)findViewById(R.id.main_container);
          rl.setAlpha(0.3F);
+         rl.setFilterTouchesWhenObscured(true);
          Intent intent = new Intent(getBaseContext(), BuyScreen.class);
          intent.putExtra("id", id);
-         intent.putExtra("price", ((Button)v.findViewById(R.id.buyBtn)).getText().toString().substring(4));
+         intent.putExtra("price", ((Button)v.findViewById(R.id.buyBtn)).getText().toString());
          intent.putExtra("type", type);
+         startActivity(intent);
+     }
+
+     public void openProfile(View view) {
+         Intent intent = new Intent(this, profileActivity.class);
          startActivity(intent);
      }
 

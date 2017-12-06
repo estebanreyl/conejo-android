@@ -46,7 +46,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:visibility="visible"/>
+            android:visibility="visible"
+            android:onClick="openHome"/>
 
     </LinearLayout>
 
@@ -76,6 +77,15 @@
             android:layout_marginBottom="30dp"
             android:textSize="30sp"/>
 
+        <!--Recent Purchases-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recent Purchases"
+            android:background="@android:color/white"
+            android:textAllCaps="false"
+            android:layout_marginBottom="1dp"
+            android:onClick="openOrders"/>
 
         <!--Payment Button-->
         <Button
@@ -84,7 +94,8 @@
             android:text="Edit Payment Info"
             android:background="@android:color/white"
             android:textAllCaps="false"
-            android:layout_marginBottom="1dp"/>
+            android:layout_marginBottom="1dp"
+            android:onClick="openEditPayment"/>
 
 
         <!--Shipping Button-->
@@ -94,7 +105,8 @@
             android:text="Edit Shipping Info"
             android:layout_marginBottom="1dp"
             android:background="@android:color/white"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:onClick="openOrders"/>
 
         <!--Password Button-->
         <Button
@@ -103,8 +115,8 @@
             android:text="Reset Password"
             android:layout_marginBottom="1dp"
             android:background="@android:color/white"
-            android:textAllCaps="false"/>
-
+            android:textAllCaps="false"
+            android:onClick="resetPassword"/>
 
         <!--Logout Button-->
         <Button
@@ -113,7 +125,8 @@
             android:text="Logout"
             android:textColor="#ff0000"
             android:background="@android:color/white"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:onClick="logoutShipping"/>
 
         <View
             android:layout_width="match_parent"
