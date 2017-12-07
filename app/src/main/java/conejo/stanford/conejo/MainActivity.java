@@ -12,10 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
+
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
@@ -166,57 +172,88 @@ public class MainActivity extends AppCompatActivity   {
         }
     }
 
-    public void deleteCard(View view) {
-
-    }
-
-    public void editMode(View view) {
-        editEnabled = true;
-    }
 
     public void exitEditMode(View view) {
-        Button edit = findViewById(R.id.)
+        Button done = (Button)findViewById(R.id.done);
+        ImageButton add = (ImageButton) findViewById(R.id.add);
+        Button edit = (Button)findViewById(R.id.edit);
+        done.setVisibility(View.GONE);
+        add.setVisibility(View.GONE);
+        edit.setVisibility(View.VISIBLE);
+        editEnabled = false;
+        shirts.notifyDataSetChanged();
+        pants.notifyDataSetChanged();
+        shoes.notifyDataSetChanged();
+    }
+
+    public void enableEditMode(View view) {
+        Button done = (Button)findViewById(R.id.done);
+        ImageButton add = (ImageButton) findViewById(R.id.add);
+        Button edit = (Button)findViewById(R.id.edit);
+        done.setVisibility(View.VISIBLE);
+        add.setVisibility(View.VISIBLE);
+        edit.setVisibility(View.GONE);
+        editEnabled = true;
+        shirts.notifyDataSetChanged();
+        pants.notifyDataSetChanged();
+        shoes.notifyDataSetChanged();
+
     }
 
     //-------------------------------------------ADAPTER CLASS--------------------------------------
     //Carousel Adapter
     //Should reimplement using arrayAdapter to improve speed
     public class MyPagerAdapter extends PagerAdapter {
-        private int[] listBackup;
-        private int[] list;
+        private ArrayList<Integer> listBackup;
+        private ArrayList<Integer> list;
         private int arrayNum;
 
         MyPagerAdapter(int[] passed, int num){
-            list = passed;
-            listBackup = passed.clone();
+            list = new ArrayList<Integer>();
+            for (int index = 0; index < passed.length; index++)list.add(passed[index]);
+            listBackup = new ArrayList<Integer>(list);
             arrayNum = num;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-
+            int drawable = listBackup.get(position);
             View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_cover,null);
             ImageView imageView = (ImageView) view.findViewById(R.id.image_cover);
-            imageView.setImageDrawable(getResources().getDrawable(list[position]));
+            imageView.setImageDrawable(getResources().getDrawable(drawable));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            view.setTag(position);
+            view.setTag(drawable);
             if(highlighted[arrayNum]){
                 ImageView lock = (ImageView) view.findViewById(R.id.lock);
                 lock.setVisibility(View.VISIBLE);
+
             }
-            /*if(editMode){
-                ImageView xButton = (ImageView) view.findViewById(R.id.lock);
+            if(editEnabled){
+                ImageView xButton = (ImageView) view.findViewById(R.id.x_button);
                 xButton.setVisibility(View.VISIBLE);
-            }*/
+                xButton.setTag(drawable);
+                xButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int drawable=(Integer)v.getTag();
+
+                        if(highlighted[arrayNum]){
+                            resetElems();
+                        }else{
+                            fixElem(drawable);
+                        }
+                    }
+                });
+            }
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position=(Integer)v.getTag();
+                    int drawable=(Integer)v.getTag();
 
                     if(highlighted[arrayNum]){
                         resetElems();
                     }else{
-                        fixElem(position);
+                        fixElem(drawable);
                     }
                 }
             });
@@ -224,14 +261,14 @@ public class MainActivity extends AppCompatActivity   {
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    int position = (Integer) v.getTag();
+                    int drawable = (Integer) v.getTag();
                     Intent intent = new Intent(getBaseContext(), SimilarItems.class);
                     String type = "";
                     if(arrayNum == 0) type = "Shirts";
                     else if(arrayNum==1) type = "Pants";
                     else type ="Shoes";
                     intent.putExtra("type",type);
-                    intent.putExtra("id",listBackup[position]);
+                    intent.putExtra("id",drawable);
                     startActivity(intent);
                     return false;
                 }
@@ -248,7 +285,7 @@ public class MainActivity extends AppCompatActivity   {
 
         @Override
         public int getCount() {
-            return list.length;
+            return list.size();
         }
 
         @Override
@@ -256,30 +293,32 @@ public class MainActivity extends AppCompatActivity   {
             return (view == object);
         }
 
-        private void fixElem(int index){
-            list = new int[1];
-            list[0] = listBackup[index];
+        private void fixElem(int drawable){
+            list = new ArrayList<Integer>();
+            list.add(drawable);
             highlighted[arrayNum] = true;
             this.notifyDataSetChanged();
             MainActivity.this.updateCarousels();
         }
 
         private void resetElems(){
-            list = listBackup.clone();
+            list = new ArrayList<Integer>(listBackup);
             highlighted[arrayNum] = false;
             this.notifyDataSetChanged();
         }
 
+        private void removeElem(int id){
+
+        }
+
         public void randomSelect(){
             if(highlighted[arrayNum])return;
-            list = new int[(int)(Math.random()*listBackup.length + 1)];
-            int[] temp = listBackup.clone();
+            long seed = System.nanoTime();
+            Collections.shuffle(list, new Random(seed));
+            ArrayList<Integer> temp = new ArrayList<Integer>(listBackup);
             Collections.shuffle(Arrays.asList(temp));
-
-            for(int i = 0; i < list.length; i++){
-                list[i] = temp[i];
-            }
-
+            int newSize = (int)(Math.random()*listBackup.size() + 1);
+            for(int i = 0; i < newSize; i++)list.add(temp.get(i));
             highlighted[arrayNum] = false;
             this.notifyDataSetChanged();
         }
