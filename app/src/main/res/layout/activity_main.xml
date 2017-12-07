@@ -41,6 +41,22 @@
 
 
         <ImageButton
+            android:contentDescription="Exit edit mode"
+            android:background="@android:color/transparent"
+            android:onClick="exitEditMode"
+            android:src="@drawable/x_icon"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:padding="14dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:tint="@android:color/darker_gray"
+            />
+
+        <ImageButton
+            android:id="@+id/add"
             android:contentDescription="add"
             android:background="@android:color/transparent"
             android:onClick="openCamera"
@@ -51,10 +67,26 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:scaleType="fitCenter"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/edit"
+            android:text="Edit"
+            android:textColor="#1dae2e"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
+            android:src="@drawable/profile"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:padding="12dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            android:onClick="editMode"/>
 
         <ImageButton
-            android:contentDescription="add"
+            android:contentDescription="Profile Screen"
             android:background="@android:color/transparent"
             android:src="@drawable/profile"
             android:layout_gravity="center"
@@ -75,7 +107,7 @@
         android:layout_marginTop="6dp">
 
         <android.support.v4.view.ViewPager
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 
@@ -89,7 +121,7 @@
         android:layout_marginTop="6dp">
 
         <android.support.v4.view.ViewPager
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 
@@ -103,7 +135,7 @@
         android:layout_marginTop="6dp">
 
         <android.support.v4.view.ViewPager
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="center" />
 

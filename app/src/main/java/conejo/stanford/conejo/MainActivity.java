@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity   {
     private MyPagerAdapter shoes;
     private View mLayout;
     private final int PERMISSION_REQUEST_CAMERA = 0;
+    private boolean editEnabled = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -165,6 +166,18 @@ public class MainActivity extends AppCompatActivity   {
         }
     }
 
+    public void deleteCard(View view) {
+
+    }
+
+    public void editMode(View view) {
+        editEnabled = true;
+    }
+
+    public void exitEditMode(View view) {
+        Button edit = findViewById(R.id.)
+    }
+
     //-------------------------------------------ADAPTER CLASS--------------------------------------
     //Carousel Adapter
     //Should reimplement using arrayAdapter to improve speed
@@ -191,6 +204,10 @@ public class MainActivity extends AppCompatActivity   {
                 ImageView lock = (ImageView) view.findViewById(R.id.lock);
                 lock.setVisibility(View.VISIBLE);
             }
+            /*if(editMode){
+                ImageView xButton = (ImageView) view.findViewById(R.id.lock);
+                xButton.setVisibility(View.VISIBLE);
+            }*/
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
