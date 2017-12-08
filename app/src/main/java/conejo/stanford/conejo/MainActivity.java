@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity   {
             shoes = new MyPagerAdapter(list, num);
             pager.setAdapter(shoes);
         }
-
         pager.setClipChildren(false);
         pager.setOffscreenPageLimit(15);
         boolean showTransformer = getIntent().getBooleanExtra("showTransformer",true);
@@ -217,7 +216,7 @@ public class MainActivity extends AppCompatActivity   {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            int drawable = listBackup.get(position);
+            int drawable = list.get(position);
             View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_cover,null);
             ImageView imageView = (ImageView) view.findViewById(R.id.image_cover);
             imageView.setImageDrawable(getResources().getDrawable(drawable));
@@ -236,12 +235,7 @@ public class MainActivity extends AppCompatActivity   {
                     @Override
                     public void onClick(View v) {
                         int drawable=(Integer)v.getTag();
-
-                        if(highlighted[arrayNum]){
-                            resetElems();
-                        }else{
-                            fixElem(drawable);
-                        }
+                        removeElem(drawable);
                     }
                 });
             }
@@ -308,7 +302,9 @@ public class MainActivity extends AppCompatActivity   {
         }
 
         private void removeElem(int id){
-
+            list.remove(list.indexOf(id));
+            listBackup.remove(listBackup.indexOf(id));
+            notifyDataSetChanged();
         }
 
         public void randomSelect(){
@@ -316,8 +312,8 @@ public class MainActivity extends AppCompatActivity   {
             long seed = System.nanoTime();
             Collections.shuffle(list, new Random(seed));
             ArrayList<Integer> temp = new ArrayList<Integer>(listBackup);
-            Collections.shuffle(Arrays.asList(temp));
-            int newSize = (int)(Math.random()*listBackup.size() + 1);
+            Collections.shuffle(temp);
+            int newSize = (int)(Math.random()*listBackup.size());
             for(int i = 0; i < newSize; i++)list.add(temp.get(i));
             highlighted[arrayNum] = false;
             this.notifyDataSetChanged();
