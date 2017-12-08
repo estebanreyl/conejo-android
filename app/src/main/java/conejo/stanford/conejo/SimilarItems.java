@@ -1,6 +1,9 @@
  package conejo.stanford.conejo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.PagerContainer;
 
  public class SimilarItems extends AppCompatActivity {
+    String price;
+    String description;
     private MyPagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +46,17 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
      @Override
     protected void onResume(){
         super.onResume();
-        LinearLayout rl = (LinearLayout)findViewById(R.id.main_container);
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.main_container);
         rl.setAlpha(1);
+        View overlay  = findViewById(R.id.overlay);
+        overlay.setVisibility(View.GONE);
     }
 
     private void loadUI(String type, int id){
         TextView description =  (TextView) findViewById(R.id.description);
         ImageView mainImg = (ImageView) findViewById(R.id.main_display);
-        description.setText(generateDescription(type));
+        this.description = generateDescription(type);
+        description.setText(this.description);
         mainImg.setImageResource(id);
     }
 
@@ -61,6 +70,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
 
      private String generateDescription(String type){
          String description = type;
+         price = DemoData.randPrice()+"";
          if(type.equals("Shoes")){
              description += " from " +
                      DemoData.randItem(DemoData.shoeBrands) + "'s " +
@@ -69,7 +79,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
                      "\n\n"+
                      "Your Size: " + DemoData.randItem(DemoData.shoeSizes)+
                      "\n"+
-                     "Price: $" + DemoData.randPrice();
+                     "Price: $" + price;
          }else{
              description += " from " +
                      DemoData.randItem(DemoData.shirtPantBrands) + "'s " +
@@ -78,7 +88,7 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
                      "\n\n"+
                      "Your Size: " + DemoData.randItem(DemoData.shirtPantSizes)+
                      "\n"+
-                     "Price: $" + DemoData.randPrice();
+                     "Price: $" + price;
          }
 
          return description;
@@ -165,9 +175,10 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
      }
 
      public void startBuyCard(int id, View v, String type){
-         LinearLayout rl = (LinearLayout)findViewById(R.id.main_container);
-         rl.setAlpha(0.3F);
-         rl.setFilterTouchesWhenObscured(true);
+         RelativeLayout rl = (RelativeLayout) findViewById(R.id.main_container);
+         rl.setAlpha(0.3f);
+         View overlay  = findViewById(R.id.overlay);
+         overlay.setVisibility(View.VISIBLE);
          Intent intent = new Intent(getBaseContext(), BuyScreen.class);
          intent.putExtra("id", id);
          intent.putExtra("price", ((Button)v.findViewById(R.id.buyBtn)).getText().toString());
@@ -178,6 +189,40 @@ import me.crosswall.lib.coverflow.core.PagerContainer;
      public void openProfile(View view) {
          Intent intent = new Intent(this, profileActivity.class);
          startActivity(intent);
+     }
+
+     public void buyDialog(View view) {
+         AlertDialog.Builder dialog = new AlertDialog.Builder(SimilarItems.this);
+         dialog.setCancelable(false);
+         dialog.setTitle("Confirm your order");
+         String message = "Are you sure you want to order ";
+         if(description.contains("shirt")) message += " a ";
+         else message+= "a pair of ";
+         message+= (description.charAt(0)+"").toLowerCase() + description.substring(1, description.indexOf("collection") + "collection".length());
+         message+= " for " + price + " again?";
+         dialog.setMessage(message);
+
+         dialog.setPositiveButton("Confirm Purchase", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int id) {
+                 AlertDialog.Builder dialog2 = new AlertDialog.Builder(SimilarItems.this);
+                 dialog2.setCancelable(true);
+                 dialog2.setTitle("Order #1201432");
+                 String message = "Your order has been confirmed, go to your orders tab under profile for more information";
+                 dialog2.setMessage(message);
+                 final AlertDialog alert2 = dialog2.create();
+                 alert2.show();
+             }
+         })
+                 .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialog, int which) {
+                         //Action for "Cancel".
+                     }
+                 });
+
+         final AlertDialog alert = dialog.create();
+         alert.show();
      }
 
 }

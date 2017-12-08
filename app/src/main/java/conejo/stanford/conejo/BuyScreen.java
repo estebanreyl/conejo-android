@@ -1,5 +1,7 @@
 package conejo.stanford.conejo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BuyScreen extends AppCompatActivity {
-
+    String price;
+    String description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,12 +26,13 @@ public class BuyScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id",R.mipmap.pants_1);
-        String price = intent.getStringExtra("price");
+        price = intent.getStringExtra("price");
         String type = intent.getStringExtra("type");
         TextView description =  (TextView) findViewById(R.id.description);
         ImageView mainImg = (ImageView) findViewById(R.id.item_image);
         mainImg.setImageResource(id);
-        description.setText(generateDescription(type,price));
+        this.description = generateDescription(type,price);
+        description.setText(this.description);
 
         //loadUI(type, id);
     }
@@ -59,5 +63,39 @@ public class BuyScreen extends AppCompatActivity {
 
     public void close(View view) {
         finish();
+    }
+
+    public void buyDialog(View view) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(BuyScreen.this);
+        dialog.setCancelable(false);
+        dialog.setTitle("Confirm your order");
+        String message = "Are you sure you want to order ";
+        if(description.contains("shirt")) message += " a ";
+        else message+= "a pair of ";
+        message+= (description.charAt(0)+"").toLowerCase() + description.substring(1, description.indexOf("collection") + "collection".length());
+        message+= " for " + price + " ?";
+        dialog.setMessage(message);
+
+        dialog.setPositiveButton("Confirm Purchase", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                AlertDialog.Builder dialog2 = new AlertDialog.Builder(BuyScreen.this);
+                dialog2.setCancelable(true);
+                dialog2.setTitle("Order #1201432");
+                String message = "Your order has been confirmed, go to your orders tab under profile for more information";
+                dialog2.setMessage(message);
+                final AlertDialog alert2 = dialog2.create();
+                alert2.show();
+            }
+        })
+                .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Action for "Cancel".
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
     }
 }

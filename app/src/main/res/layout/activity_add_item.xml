@@ -23,19 +23,9 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/camera"
-        android:text="Capture" />
+        android:text="Capture"
+        android:onClick="itemAdded"/>
 
-    <ImageButton
-        android:id="@+id/OverlayItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/tshirt_canvas"
-        android:text="Capture" />
 
 </RelativeLayout>
 

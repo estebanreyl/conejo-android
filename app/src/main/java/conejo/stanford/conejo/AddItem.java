@@ -1,6 +1,7 @@
 package conejo.stanford.conejo;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -30,6 +31,13 @@ public class AddItem extends AppCompatActivity {
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
+        AlertDialog.Builder helpDialog = new AlertDialog.Builder(AddItem.this);
+        helpDialog.setCancelable(true);
+        helpDialog.setTitle("Help");
+        String message = "Take a picture of the item you want to add, we will take care of the rest";
+        helpDialog.setMessage(message);
+        final AlertDialog alert = helpDialog.create();
+        alert.show();
     }
 
     /** A safe way to get an instance of the Camera object. */
@@ -45,5 +53,13 @@ public class AddItem extends AppCompatActivity {
     }
 
 
-
+    public void itemAdded(View view) {
+        AlertDialog.Builder helpDialog = new AlertDialog.Builder(AddItem.this);
+        helpDialog.setCancelable(true);
+        helpDialog.setTitle("Picture Taken");
+        String message = "Your item has been registered, it will soon appear on your wardrobe once our Artificial Intelligence system has finished analyzing it. Check for notifications in your wardrobe screen";
+        helpDialog.setMessage(message);
+        final AlertDialog alert = helpDialog.create();
+        alert.show();
+    }
 }

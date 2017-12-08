@@ -1,5 +1,6 @@
 package conejo.stanford.conejo;
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity   {
         initCarousels(containerPants,DemoData.pants,1);
         initCarousels(containerShoes,DemoData.shoes,2);
         mLayout = findViewById(R.id.main_layout);
+
+        AlertDialog.Builder helpDialog = new AlertDialog.Builder(MainActivity.this);
+        helpDialog.setCancelable(true);
+        helpDialog.setTitle("Help");
+        String message = "Swipe across your wardrobe items. Single Press items to lock them into position for AI powered look recommendations. Long press to go into the item's explore page. Click on edit to find the add new items button and to remove items from your wardrobe";
+        helpDialog.setMessage(message);
+        final AlertDialog alert = helpDialog.create();
+        alert.show();
 
     }
 
@@ -309,11 +318,16 @@ public class MainActivity extends AppCompatActivity   {
 
         public void randomSelect(){
             if(highlighted[arrayNum])return;
+            if(!highlighted[0] && !highlighted[1] && !highlighted[2]){
+                list = new ArrayList<Integer>(listBackup);
+                this.notifyDataSetChanged();
+                return;
+            }
             long seed = System.nanoTime();
             Collections.shuffle(list, new Random(seed));
-            ArrayList<Integer> temp = new ArrayList<Integer>(listBackup);
+            ArrayList<Integer> temp = new ArrayList<Integer>(list);
             Collections.shuffle(temp);
-            int newSize = (int)(Math.random()*listBackup.size());
+            int newSize = (int)(Math.random()*list.size());
             for(int i = 0; i < newSize; i++)list.add(temp.get(i));
             highlighted[arrayNum] = false;
             this.notifyDataSetChanged();
